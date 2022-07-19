@@ -12,6 +12,6 @@
 .rustup/
 .ssh/
 .viminfo
-go/
-local/
+/go/
+/local/
 
