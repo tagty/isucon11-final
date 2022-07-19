@@ -1,0 +1,17 @@
+.bash_history
+.bash_logout
+.bashrc
+.bundle/
+.cache/
+.cargo/
+.config/
+.gitconfig
+.local/
+.npm/
+.profile
+.rustup/
+.ssh/
+.viminfo
+go/
+local/
+
