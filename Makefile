@@ -47,5 +47,11 @@ alp:
 pprof-kill:
 	ssh isucon11-final-1 "pgrep -f 'pprof' | xargs kill;"
 
+.PHONY: pprof
 pprof:
-	go tool pprof -http=0.0.0.0:1080 -seconds=45 http://35.75.126.244/debug/pprof/profile
+	ssh isucon11-final-1 "/home/isucon/local/go/bin/go tool pprof -seconds=5 webapp/go/isucholar http://localhost:6060/debug/pprof/profile"
+
+pprof-show:
+	$(eval latest := $(shell ssh isucon11-final-1 "ls -rt ~/pprof/ | tail -n 1"))
+	scp isucon11-final-1:~/pprof/$(latest) ./pprof
+	go tool pprof -http=":1080" ./pprof/$(latest);
