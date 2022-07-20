@@ -39,7 +39,7 @@ pt-query-digest:
 	ssh isucon11-final-1 "sudo pt-query-digest --limit 10 /var/log/mysql/mysql-slow.log"
 
 ALPSORT=sum
-ALPM="/posts/[0-9]+,/posts?.+,/@.+,/image/[0-9]+"
+ALPM="/api/courses/[0-9A-Z]{26}/classes/[0-9A-Z]{26}/assignments/export"
 OUTFORMAT=count,method,uri,min,max,sum,avg,p99
 
 alp:

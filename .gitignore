@@ -12,6 +12,7 @@
 .rustup/
 .ssh/
 .viminfo
+.vscode/
 /go/
 /local/
 /pprof/
