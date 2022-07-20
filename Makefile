@@ -32,7 +32,8 @@ nginx-restart:
 
 bench-run:
 	ssh isucon11-final-1 " \
-		/home/isucon/private_isu.git/benchmarker/bin/benchmarker -u /home/isucon/private_isu.git/benchmarker/userdata -t http://35.75.126.244"
+		cd /home/isucon/benchmarker; \
+		./bin/benchmarker -target localhost:443 -tls"
 
 pt-query-digest:
 	ssh isucon11-final-1 "sudo pt-query-digest --limit 10 /var/log/mysql/mysql-slow.log"
@@ -54,4 +55,4 @@ pprof:
 pprof-show:
 	$(eval latest := $(shell ssh isucon11-final-1 "ls -rt ~/pprof/ | tail -n 1"))
 	scp isucon11-final-1:~/pprof/$(latest) ./pprof
-	go tool pprof -http=":1080" ./pprof/$(latest);
+	go tool pprof -http=":1080" ./pprof/$(latest)
