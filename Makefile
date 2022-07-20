@@ -50,7 +50,7 @@ pprof-kill:
 
 .PHONY: pprof
 pprof:
-	ssh isucon11-final-1 "/home/isucon/local/go/bin/go tool pprof -seconds=5 webapp/go/isucholar http://localhost:6060/debug/pprof/profile"
+	ssh isucon11-final-1 "/home/isucon/local/go/bin/go tool pprof -seconds=75 webapp/go/isucholar http://localhost:6060/debug/pprof/profile"
 
 pprof-show:
 	$(eval latest := $(shell ssh isucon11-final-1 "ls -rt ~/pprof/ | tail -n 1"))
