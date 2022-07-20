@@ -8,9 +8,9 @@ deploy:
 
 build:
 	ssh isucon11-final-1 " \
-		cd /home/isucon/private_isu/webapp/golang; \
-		/home/isucon/.local/go/bin/go build -o app app.go; \
-		sudo systemctl restart isu-go.service"
+		cd /home/isucon/webapp/go; \
+		/home/isucon/local/go/bin/go build -o isucholar; \
+		sudo systemctl restart isucholar.go.service"
 
 mysql-deploy:
 	ssh isucon11-final-1 "sudo dd of=/etc/mysql/mysql.conf.d/mysqld.cnf" < ./etc/mysql/mysql.conf.d/mysqld.cnf
