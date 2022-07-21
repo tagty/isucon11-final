@@ -1106,7 +1106,7 @@ func (h *handlers) SubmitAssignment(c echo.Context) error {
 	defer tx.Rollback()
 
 	var status CourseStatus
-	if err := tx.Get(&status, "SELECT `status` FROM `courses` WHERE `id` = ? FOR SHARE", courseID); err != nil && err != sql.ErrNoRows {
+	if err := tx.Get(&status, "SELECT `status` FROM `courses` WHERE `id` = ?", courseID); err != nil && err != sql.ErrNoRows {
 		c.Logger().Error(err)
 		return c.NoContent(http.StatusInternalServerError)
 	} else if err == sql.ErrNoRows {
