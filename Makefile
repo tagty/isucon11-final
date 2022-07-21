@@ -39,18 +39,27 @@ pt-query-digest:
 	ssh isucon11-final-1 "sudo pt-query-digest --limit 10 /var/log/mysql/mysql-slow.log"
 
 ALPSORT=sum
-ALPM="/api/courses/[0-9A-Z]{26}/classes/[0-9A-Z]{26}/assignments/export"
+# /api/courses/[0-9A-Z]{26}/classes/[0-9A-Z]{26}/assignments/export
+# /api/courses/[0-9A-Z]{26}/classes/[0-9A-Z]{26}/assignments/scores
+# /api/courses/[0-9A-Z]{26}/classes/[0-9A-Z]{26}/assignments
+# /api/courses/[0-9A-Z]{26}/classes
+# /api/courses/[0-9A-Z]{26}/status
+# /api/courses/[0-9A-Z]{26}
+# /api/courses?.*
+# /api/announcements/[0-9A-Z]{26}
+# /api/announcements?.*
+ALPM="/api/courses/[0-9A-Z]{26}/classes/[0-9A-Z]{26}/assignments/export,/api/courses/[0-9A-Z]{26}/classes/[0-9A-Z]{26}/assignments/scores,/api/courses/[0-9A-Z]{26}/classes/[0-9A-Z]{26}/assignments,/api/announcements/[0-9A-Z]{26},/api/courses/[0-9A-Z]{26}/status,/api/courses/[0-9A-Z]{26}/classes,/api/courses/[0-9A-Z]{26},/api/courses?.*,/api/announcements?.*"
 OUTFORMAT=count,method,uri,min,max,sum,avg,p99
 
 alp:
 	ssh isucon11-final-1 "sudo alp ltsv --file=/var/log/nginx/access.log --nosave-pos --pos /tmp/alp.pos --sort $(ALPSORT) --reverse -o $(OUTFORMAT) -m $(ALPM) -q"
 
-pprof-kill:
-	ssh isucon11-final-1 "pgrep -f 'pprof' | xargs kill;"
-
 .PHONY: pprof
 pprof:
 	ssh isucon11-final-1 "/home/isucon/local/go/bin/go tool pprof -seconds=75 webapp/go/isucholar http://localhost:6060/debug/pprof/profile"
+
+pprof-kill:
+	ssh isucon11-final-1 "pgrep -f 'pprof' | xargs kill;"
 
 pprof-show:
 	$(eval latest := $(shell ssh isucon11-final-1 "ls -rt ~/pprof/ | tail -n 1"))
